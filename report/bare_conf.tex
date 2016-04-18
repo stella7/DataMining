@@ -433,7 +433,7 @@ MovieLens is a movie recommender project, developed by the Department of Compute
 \subsection{Reconstruct Data in MySQL Database}
 At first we tried to store all the data in IMDB into MySQL. As mentioned above, the original dataset in IMDB is in text files which is a list format within natural language.This provided the insight that raw IMDB data are unsuitable for data mining unless they are processed through some natural language processing tool. To minimize the effort spent on parsing all the text files and then converting each one to a table in a database, a third party tool name IMDBPY as obtained from\cite{imdbpy} is used. It is an alternative way to navigate through movie information. IMDBPY automatically imports the list files and creates a MySQL database with tables and populates the tables with required data. 
 
-The dataset contains abundant information about movies which makes it a very large amount. It takes more than 3 hours to convert all the files and import the data into MySQL. Then we add relevant indexes and foreign keys in the database.
+The dataset contains abundant information about movies which makes it a very large amount of records. It takes more than 3 hours to convert all the files and import the data into MySQL with IMDBPY. Then we add relevant indexes and foreign keys in the database. Figure 1 shows the relational schema of the IMDB database. We can see that this structure makes query in the database complicated because many additional joins are needed.
 
 \begin{figure}
 	\centering
@@ -509,7 +509,7 @@ Another evaluation method is precision-recall: precision tells us how good the p
 
 \subsection{Rating Prediction}
 \subsubsection{Visualizing Data}
-Data for this part is from the MovieLens dataset which is rich source for recommendation. We firstly visualize the data by ploting several histograms. Figure 1 is the rating distribution of the raw data. The rating range is from 1 star to 5 stars. Then we use a z-score normalization to normalize the data for further analysis. Figure 2 shows the distribution of user's rating count. We can see that many people just reviews quite a few movies. Figure 3 is the distribution of each movie's average rating. It indicates that most movies receive 3 to 4 stars.
+Data for this part is from the MovieLens dataset which is a rich resource for recommendation. We firstly visualize the data by ploting several histograms. Figure 1 is the rating distribution of the raw data. The rating range is from 1 star to 5 stars. Then we use a z-score normalization to normalize the data for further analysis. Figure 2 shows the distribution of user's rating count. We can see that many people just reviews quite a few movies. Figure 3 is the distribution of each movie's average rating. It indicates that most movies received 3 to 4 stars.
 \begin{figure}
 	\centering
 	\includegraphics[width=2.8in]{rating.png}
@@ -532,7 +532,7 @@ Data for this part is from the MovieLens dataset which is rich source for recomm
 \end{figure}
 
 \subsubsection{Collaborative Filtering Results}
-We apply both user-based CF and item-based CF for rating predicting. Also, we use a random prediction for the baseline.
+We apply both user-based CF and item-based CF for rating predicting. Also, we use a random prediction for the baseline. Figure 5 compares the prediction accuracy of the three methods. 
 \begin{figure}
 	\centering
 	\includegraphics[width=2.8in]{RMSE.png}
