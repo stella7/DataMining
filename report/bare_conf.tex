@@ -311,7 +311,7 @@
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
-
+\usepackage{graphicx}
 \begin{document}
 %
 % paper title
@@ -376,7 +376,9 @@ Email: ...@uwaterloo.ca}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-Abundance of movie data across the internet makes it an obvious candidate for machine learning and knowledge discovery.
+The abundance of movie data in terms of review, rating or even detail information in the internet has encouraged many researches to formulate techniques to analyze the pattern in movie data invovlving in discovering factors which will influence the success of movies and  developping recommendation systems of movie according to user reviews. In this paper, we apply different data mining techniques including association rules, clutering, classification and 
+prediction on two Internet movie datasets.
+
 \end{abstract}
 
 % no keywords
@@ -398,9 +400,9 @@ Abundance of movie data across the internet makes it an obvious candidate for ma
 
 \section{Introduction}
 % no \IEEEPARstart
-Nowadays, we live in a world with vast amounts of data collected everyday. Analyzing such data is an urgent need, thus, data mining has become a popular topic and a fast-growing field. Data mining techniques are already widely deployed in many essential area such as business, society, science, medicine, engineering and almost everywhere.
+Nowadays, we live in a world with vast amounts of data collected everyday. Analyzing such data is an urgent need, thus, data mining has become a popular topic and a fast-growing field. Data mining techniques are already widely deployed in many essential area such as business, society, science, medicine, engineering and almost everywhere\cite{jiawei}.
 
-Data mining involves different knowledge discovery such as classification, clustering, association analysis. Association rule learning is a method for discovering interesting relations between variables in large databases. Clustering is an unsupervised data mining technique for discovering interesting patterns from a given database [3]. Classification is a supervised approach classifying records in a data set into predefined classes or even defining classes on the go.
+Data mining involves different knowledge discovery such as classification, clustering, association analysis\cite{Usama}. Association rule learning is a method for discovering interesting relations between variables in large databases. Clustering is an unsupervised data mining technique for discovering interesting patterns from a given database. Classification is a supervised approach classifying records in a data set into predefined classes or even defining classes on the go.
 
 It is very likely that a user will give a movie similar rating with another user who has the same taste. Such an approach that making predictions based on the interests of a user by collecting preference or tastes information from other users is Collaborative Filtering(CF) which is the most popular method in recommendation systems.
  
@@ -412,19 +414,19 @@ The organisation of the paper is as follows: Section 2 provides the literature r
 
 
 \section{Literature Review}
-\subsection{Data mining for the internet of things: literature review and challenges}
+\subsection{Data mining for the internet of things: literature review and challenges\cite{fengchen}}
 This is a review article surveying data mining through 3 perspectives. From the knowledge view, it illustrated classification, clustering, association analysis, time series analysis, outlier analysis and related realization such as SVM, Bayesian networks, SVD, etc from technique view. Then it introduced application of these theory and techniques in different fields. It also discussed challenges for data mining, like extraction useful data from large quantity of data with low quality. Finally, based on the former analysis on data mining algorithms and application, the author proposed a system architecture for big data mining system.
-\subsection{A Case Study in a Recommender System Based on Purchase Data}
+\subsection{A Case Study in a Recommender System Based on Purchase Data\cite{Bruno}}
 This paper present three kinds of collaborative filtering algorithms- memory based approach, matrix factorization and bigram matrix method- on a real-world dataset for recommending items to customer according customers’ purchase histories. The author established models for the three methods and applied them on different settings, comparing their results. They also proposed the multidimensional model for contextual analysis, but they didn’t talk about it in detail due to the space limit. The research mainly drew the conclusion that: (1) the algorithm based on bigram association rules obtained the best performances; (2) the performance of these algorithms has slight difference compared to that of introducing contextual analysis.
-\subsection{Algorithms and Methods in Recommender Systems}
+\subsection{Algorithms and Methods in Recommender Systems\cite{Daniar}}
 In this report, the researcher have described traditional and modern recommender approaches with giving concrete examples and presenting their problems. The traditional ones which work with profiles of users, Content-based filtering measuring similarities and Collaborative  filtering building neighbourhood, are usually combined to avoid some limitations and problems for better results. Some modern methods are an extension of collaborative filtering, such as Context-aware, Semantic-based and Cross-domain based approaches, which outperform original one. Nevertheless, obtaining context information and creating new text mining techniques are some of the problems remaining to be solved. Others like Peer-to-Peer and Cross-lingual approaches are briefly introduced by the researcher.
 
 \section{Data Collection}
 
 \subsection{IMDB}
-The Internet Movie Database (IMDb) is a comprehensive online database having information about movies, actors, television shows, production, etc. The IMDb web site (http://www.imdb.com/ [4]) provides more than 50 text files in ad-hoc format (called lists) containing different characteristics about movies (e.g. actors.list or running-times.list). Given the large scale of the data and the degree of interactions between the people, IMDb is a fertile source of data mining problems.
+The Internet Movie Database (IMDb) is a comprehensive online database having information about movies, actors, television shows, production, etc. The IMDb web site\cite{imdb} provides more than 50 text files in ad-hoc format (called lists) containing different characteristics about movies (e.g. actors.list or running-times.list). Given the large scale of the data and the degree of interactions between the people, IMDb is a fertile source of data mining problems.
 \subsection{MovieLens}
-MovieLens is a movie recommender project, developed by the Department of Computer Science and Engineering at the University of Minnesota. MovieLens is a typical collaborative filtering system that collects movie preferences from users and then groups users with similar tastes. Based on the movie ratings expressed by all the users in a group it attempts to predict for each individual their opinion on movies they have not yet seen. Two data sets are available at the MovieLens web site (http://movielens.umn.edu/ [2]). The first one consists of 100,000 ratings for 1682 movies by 943 users. The second one consists of approximately 1 million ratings for 3883 movies by 6040 users.
+MovieLens is a movie recommender project, developed by the Department of Computer Science and Engineering at the University of Minnesota. MovieLens is a typical collaborative filtering system that collects movie preferences from users and then groups users with similar tastes. Based on the movie ratings expressed by all the users in a group it attempts to predict for each individual their opinion on movies they have not yet seen. Two data sets are available at the MovieLens web site\cite{movielens}. In this paper, we will use the MovieLens 100K dataset which consists of 100,000 ratings for 1682 movies by 943 users.
 \subsection{Subsection Heading Here}
 Subsection text here.
 
@@ -439,6 +441,7 @@ Subsubsection text here.
 \subsection{Clustering}
 \subsection{Classification}
 \subsection{Collaborative Filtering}
+
 \textit{User-based collaborative filtering}, also know as \textit{k-NN collaborative},was the first of the automated CF methods. It find other users whose past rating behavior is similar to that of current user and
 use their ratings on that item to predict what the current user will like. 
 
@@ -475,9 +478,61 @@ Our goal is to predict the rating a user would give to a restaurant. We predict 
 
 Here $r'_{u,i}$ is the predicted rating from user $u$ on item $i$ and $r_{u,i}$ is the true rating; $N$ is the size of test dataset. 
 
+Another evaluation method is precision-recall: precision tells us how good the predictions are. In other words, how many were a hit.; recall tells us how many of the hits were accounted for, or the coverage of the desirable outcome.
+\begin{equation}
+\ precision = \frac{\left|\{relevant documents\}\bigcap \{retrieved documents\}\right|}{\left|\{retrieved documents\}\right|}
+\end{equation}
+\begin{equation}
+\ recall = \frac{\left|\{relevant documents\}\bigcap \{retrieved documents\}\right|}{\left|\{retrieved documents\}\right|}
+\end{equation}
+
+
 \section{Experimental Evaluation }
+\subsection{title}
+\subsection{title}
 
+\subsection{Rating Prediction}
+Data for this part is from the MovieLens dataset which is rich source for recommendation. We firstly visualize the data by ploting several histograms. Figure 1 is the rating distribution of the raw data. The rating range is from 1 star to 5 stars. Then we use a z-score normalization to normalize the data for further analysis. Figure 2 shows the distribution of user's rating count. We can see that many people just reviews quite a few movies. Figure 3 is the distribution of each movie's average rating. It indicates that most movies receive 3 to 4 stars.
+\begin{figure}
+	\centering
+	\includegraphics[width=2.5in]{rating.png}
+	\caption{Rating Distribution}
+	\label{fig:side:a}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=2.5in]{user_rating.png}
+	\caption{User Rating Count Distribution}
+	\label{fig:side:a}
+\end{figure}
 
+\begin{figure}
+	\centering
+	\includegraphics[width=2.5in]{movie_rating.png}
+	\caption{Movie Average Rating Distribution}
+	\label{fig:side:a}
+\end{figure}
+
+We apply both user-based CF and item-based CF for rating predicting. Also, we use a random prediction for the baseline.
+\begin{figure}
+	\centering
+	\includegraphics[width=2.8in]{RMSE.png}
+	\caption{RMSE}
+	\label{fig:side:a}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=2.8in]{ROC.png}
+	\caption{ROC Curves}
+	\label{fig:side:a}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2.8in]{precision_recall.png}
+	\caption{Precision and Recall Curves}
+	\label{fig:side:a}
+\end{figure}
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
 % For figures, \caption should occur after the \includegraphics.
@@ -617,11 +672,23 @@ The authors would like to thank...
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
 \begin{thebibliography}{1}
-
+\bibitem{jiawei}
+Jiawei Han, Micheline Kamber, Jian Pei. \emph{Data Mining Concepts and Techniques}, 3rd Edition, 2012.
+\bibitem{Usama}
+Usama Fayyad, Gregory Piatetsky-Shapiro, and Padhraic Smyth. \emph{From Data Mining to Knowledge Discovery in Databases}. AI Magazine Volume 17 Number 3, 1996.
+\bibitem{fengchen}
+Feng Chen, Pan Deng, Jianfu Wan and etc. \emph{Data Mning for the Internet of Things: Literature Review and cChallenges}. International Journal of Distributed Sensor Networks, 2015.
+\bibitem{Bruno}
+Bruno Pradel, Savaneary Sean,  Julien Delporte. \emph{A Case Study in a Recommender System Based on Purchase Data}. Proceedings of the 17th ACM SIGKDD international conference on Knowledge discovery and data mining, Pages 377-385, 2011.
+\bibitem{Daniar}
+Daniar Asanov. \emph{Algorithms and Methods in Recommender Systems.} Berlin Institute of Technology, Berlin, Germany, 2011.
+\bibitem{imdb}
+http://www.imdb.com/
+\bibitem{movielens}
+http://movielens.umn.edu/ 
 \bibitem{IEEEhowto:kopka}
 H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-
+0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
 \end{thebibliography}
 
 
