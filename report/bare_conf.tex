@@ -312,6 +312,7 @@
 \hyphenation{op-tical net-works semi-conduc-tor}
 
 \usepackage{graphicx}
+\usepackage{amsmath}
 \begin{document}
 %
 % paper title
@@ -376,8 +377,7 @@ Email: ...@uwaterloo.ca}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-The abundance of movie data in terms of review, rating or even detail information in the internet has encouraged many researches to formulate techniques to analyze the pattern in movie data invovlving in discovering factors which will influence the success of movies and  developping recommendation systems of movie according to user reviews. In this paper, we apply different data mining techniques including association rules, clutering, classification and 
-prediction on two Internet movie datasets.
+The abundance of movie data in terms of review, rating or even detail information in the internet has encouraged many researches to formulate techniques to analyze the pattern in movie data invovlving in discovering factors which will influence the success of movies and  developping recommendation systems of movie according to user reviews. With these techniques, poeple are able to analyse links between attributes in real data sets so that salesperson can boost their sales by puting associated or similar products together, or by recommending products the customers will most likely be interested in.  In this paper, we apply different data mining techniques including association rules, clutering, classification and prediction on two Internet movie datasets.
 
 \end{abstract}
 
@@ -422,19 +422,28 @@ This paper present three kinds of collaborative filtering algorithms- memory bas
 In this report, the researcher have described traditional and modern recommender approaches with giving concrete examples and presenting their problems. The traditional ones which work with profiles of users, Content-based filtering measuring similarities and Collaborative  filtering building neighbourhood, are usually combined to avoid some limitations and problems for better results. Some modern methods are an extension of collaborative filtering, such as Context-aware, Semantic-based and Cross-domain based approaches, which outperform original one. Nevertheless, obtaining context information and creating new text mining techniques are some of the problems remaining to be solved. Others like Peer-to-Peer and Cross-lingual approaches are briefly introduced by the researcher.
 
 \section{Data Collection}
-
+In this paper, we will implement association rules, clustering, classification and rating prediction. We choose two widely used datasets about moives- IMDB and Movielens. IMDB dataset is used for the former three data mining methods and MovieLens is for rating predicting.
 \subsection{IMDB}
 The Internet Movie Database (IMDb) is a comprehensive online database having information about movies, actors, television shows, production, etc. The IMDb web site\cite{imdb} provides more than 50 text files in ad-hoc format (called lists) containing different characteristics about movies (e.g. actors.list or running-times.list). Given the large scale of the data and the degree of interactions between the people, IMDb is a fertile source of data mining problems.
 \subsection{MovieLens}
 MovieLens is a movie recommender project, developed by the Department of Computer Science and Engineering at the University of Minnesota. MovieLens is a typical collaborative filtering system that collects movie preferences from users and then groups users with similar tastes. Based on the movie ratings expressed by all the users in a group it attempts to predict for each individual their opinion on movies they have not yet seen. Two data sets are available at the MovieLens web site\cite{movielens}. In this paper, we will use the MovieLens 100K dataset which consists of 100,000 ratings for 1682 movies by 943 users.
-\subsection{Subsection Heading Here}
-Subsection text here.
 
-
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
 
 \section{Data Preparation}
+\subsection{Reconstruct Data in MySQL Database}
+At first we tried to store all the data in IMDB into MySQL. As mentioned above, the original dataset in IMDB is in text files which is a list format within natural language.This provided the insight that raw IMDB data are unsuitable for data mining unless they are processed through some natural language processing tool. To minimize the effort spent on parsing all the text files and then converting each one to a table in a database, a third party tool name IMDBPY as obtained from\cite{imdbpy} is used. It is an alternative way to navigate through movie information. IMDBPY automatically imports the list files and creates a MySQL database with tables and populates the tables with required data. 
+
+The dataset contains abundant information about movies which makes it a very large amount. It takes more than 3 hours to convert all the files and import the data into MySQL. Then we add relevant indexes and foreign keys in the database.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=3.5in]{ERgraph.png}
+	\caption{IMDB Database}
+	\label{fig:side:a}
+\end{figure}
+
+\subsection{Parsing Data in R}
+
 
 \section{Methodologys}
 \subsection{Association Rules}
@@ -480,10 +489,17 @@ Here $r'_{u,i}$ is the predicted rating from user $u$ on item $i$ and $r_{u,i}$ 
 
 Another evaluation method is precision-recall: precision tells us how good the predictions are. In other words, how many were a hit.; recall tells us how many of the hits were accounted for, or the coverage of the desirable outcome.
 \begin{equation}
-\ precision = \frac{\left|\{relevant documents\}\bigcap \{retrieved documents\}\right|}{\left|\{retrieved documents\}\right|}
+\begin{split}
+& precision = \\
+& \frac{\left|\{relevant documents\}\bigcap \{retrieved documents\}\right|}{\left|\{retrieved documents\}\right|}
+\end{split}
 \end{equation}
+
 \begin{equation}
-\ recall = \frac{\left|\{relevant documents\}\bigcap \{retrieved documents\}\right|}{\left|\{retrieved documents\}\right|}
+\begin{split}
+& recall = \\
+&\frac{\left|\{relevant documents\}\bigcap \{retrieved documents\}\right|}{\left|\{retrieved documents\}\right|}
+\end{split}
 \end{equation}
 
 
@@ -492,27 +508,30 @@ Another evaluation method is precision-recall: precision tells us how good the p
 \subsection{title}
 
 \subsection{Rating Prediction}
+\subsubsection{Visualizing Data}
 Data for this part is from the MovieLens dataset which is rich source for recommendation. We firstly visualize the data by ploting several histograms. Figure 1 is the rating distribution of the raw data. The rating range is from 1 star to 5 stars. Then we use a z-score normalization to normalize the data for further analysis. Figure 2 shows the distribution of user's rating count. We can see that many people just reviews quite a few movies. Figure 3 is the distribution of each movie's average rating. It indicates that most movies receive 3 to 4 stars.
 \begin{figure}
 	\centering
-	\includegraphics[width=2.5in]{rating.png}
+	\includegraphics[width=2.8in]{rating.png}
 	\caption{Rating Distribution}
 	\label{fig:side:a}
 \end{figure}
+
 \begin{figure}
 	\centering
-	\includegraphics[width=2.5in]{user_rating.png}
+	\includegraphics[width=2.8in]{user_rating.png}
 	\caption{User Rating Count Distribution}
 	\label{fig:side:a}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=2.5in]{movie_rating.png}
+	\includegraphics[width=2.8in]{movie_rating.png}
 	\caption{Movie Average Rating Distribution}
 	\label{fig:side:a}
 \end{figure}
 
+\subsubsection{Collaborative Filtering Results}
 We apply both user-based CF and item-based CF for rating predicting. Also, we use a random prediction for the baseline.
 \begin{figure}
 	\centering
@@ -686,6 +705,9 @@ Daniar Asanov. \emph{Algorithms and Methods in Recommender Systems.} Berlin Inst
 http://www.imdb.com/
 \bibitem{movielens}
 http://movielens.umn.edu/ 
+\bibitem{imdbpy}
+http://imdbpy.sourceforge.net/
+
 \bibitem{IEEEhowto:kopka}
 H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
 0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
