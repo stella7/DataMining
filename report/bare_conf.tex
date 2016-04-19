@@ -443,13 +443,104 @@ The dataset contains abundant information about movies which makes it a very lar
 \end{figure}
 
 \subsection{Parsing Data in R}
+The downloaded original files were too large to effectively load in R. We find a python script which can make a unique http request and retrieve data sample randomly. As our classification and clustering are based on the genre of the movie, there are many attributes are useless, such as seriesID, season, Episode, and etc. We choose to drop these columns during data cleaning process. There are 29 genres in total in our dataset. After processing, the movie dataframe contains 11142 rows of records and 31 attributes for each record.  
 
+There is one crucial problem that will influence our analysis in the following parts is that we noticed there are many missing values in the data. Almost every rows have one or more N/A value in different attributes. It is not possible to delete rows with missing value since it results in deleting almost the whole data. It is also impossible to replace the missing value because the values are strings, stratagies in data cleaning dealing with missing values are not suitable for this case.
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=3.5in]{genre_count}
+	\caption{All Genre}
+	\label{fig:side:a}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=3.5in]{genre_dis.png}
+	\caption{Genre Distribution}
+	\label{fig:side:a}
+\end{figure}
+
+We count the number of each genre in the sample set and plot the histogram as Figure 3. The rating range in IMDB is from 1 to 10. From Figure 4, we can see that more than 90\% of the movies have rating between 5 to 7.5. The maximum rating is 9.6 while the minimum rating is 1.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=3.5in]{rating_count.png}
+	\caption{Rating Distribution in IMDB}
+	\label{fig:side:a}
+\end{figure}
+
+Figure 5 shows the movie numbers in each year from 1891 to 2018. There is a clear and exponential increase in the number of movies with the increase of the year, especially during the latest 20 year. This is reasonable as it is consistant with reality which can be inferred to correspond to the growth of the movie industry over time.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=3.5in]{year_count.png}
+	\caption{Movie count by Year}
+	\label{fig:side:a}
+\end{figure}
 
 \section{Methodologys}
 \subsection{Association Rules}
-\subsection{Clustering}
+Association rules are information gathered from datasets. Data mining are interested in discovering relations between attributes that always occur together for prediction and recommendation. 
+
+Formulation of the Association Rules Mining problem:
+Given a dataset of n samples , where each sample has k items , the total possible items ().  An association rule is an implication in the form of , where x, y are subsets of I and disjoint, also known as itemsets. Following are some definition of concepts in the Association Rules Mining.
+
+\textit{Support.} The support of an itemset x with respect to a dataset is the proportion of samples in which x occurs in the dataset. The support of an association rule  with respect to a dataset is the proportion of samples in which itemsets x and y occur together in the dataset. 
+
+\textit{Confidence.} The confidence of an association rule  with respect to a dataset is the ratio of number of samples in which itemsets x and y occur together to the number of samples in which as long as itemset x occurs in the dataset. The confidence of can also be presented by the ratio of the support of  to the support of itemset x.
+
+\textit{Lift.} The lift of an association rule  with respect to a dataset is defined as the ratio 
+of  the support of  to the product of the support of itemset x and the support of 
+itemset y.
+
+As many association rules are inadequate and useless due to some items occur together by 
+chance, it is necessary to set thresholds for support and confidence respectively for reducing such association rules. 
+
+In conclusion, the Association Rule Mining problem is to find out those association rules of which support and confidence above given support and confidence thresholds. 
+
 \subsection{Classification}
+As we have got the main genre for every movie sample after preprocessing the original dataset, we will carry on a genre prediction using some classification methods. Classification is a supervised approach in the field of data mining, and it discovers a knowledge pattern from a training set of data of which the class membership is already labeled, then use this pattern to identify every entry of a new set of data, call testing set, belong to which class. There are a lot of specific methods of classification, such as K-Nearest Neighbours(K-NN), Support Vector Machine(SVM), Naive Bayes classifier, Decision Tree, Neural Network.
+In this project, these classification algorithms as following are used to predict the genre of a movie sample:  K-Nearest Neighbours, Naive Bayes classifier, C4.5, RIPPER, Oblique Tree. It is worthy to notice that the last three methods belong to Decision Tree. 
+\subsubsection{K-Nearest Neighbours}
+K-NN is a similarity based classifier, the label of a testing entry is associated with the label of its neighbours. When given a testing set of data, first calculate each entry’s K nearest neighbours in the training set defined by the closeness between them, usually on the basis of a specific distance function or other metrics. After generating K nearest neighbours, the algorithm finds out their labels and take a vote. In another word, an entry is assigned to the most common class among its K nearest neighbours. 
+In practice, the value of K should be chosen not too large or too small. Though large value of K reduce the effect of noise, it makes less distinct boundaries between classes and leads to a underfitting problem. In the contrast, small value of K will cause overfitting. Therefore, we choose a proper K under the guideline that it should be odd and  where n is the number of samples.
+
+\subsubsection{Naive Bayes classifier}
+Naive Bayes classifier is a probabilistic approach based on Bayes theorem and make a strong assumption that the value of every attribute of a sample is independent with each other. Bayes Formula is as follows: 
+\begin{equation}
+P(c_i|s) = \frac{P(s|c_i) \cdot P(c_i)}{P(s)}
+\end{equation}
+$c_i$ is class $i$ and $s$ is a sample
+where $P(c_i|s)$ is called posterior, $P(s|c_i)$ is called likelyhood, $P(c_i)$ is called prior, $P(s)$ is called evidence.
+
+Bayes decision rule:
+
+if $P(c_1|s) > P(c_2|s)$, $s$ belongs to class 1;
+
+else if $P(c_1|s) < P(c_2|s)$, $s$ belongs to class 2. 
+
+Naive Bayes classifier assumes a sample has d discrete­valued attributes, $s = (a_1, ......, a_d)$. Therefore, $P(s|c_i) = P(a_1, ......, a_d|c_i) = \prod^d_1P(a_j|c_i)$.
+
+We can learn likelihood and prior from the training dataset, as $P(a_j|c_i)$ can be evaluated by calculating the fraction of samples in class i share the same feature values, prior $P(c_i)$ is equals to number of samples in class i / number of all samples, moreover, evidence $P(s)$ is identical for all samples. Thus, it is possible to assign each new sample a class label based
+on the learning of training dataset, $P(c_i|s^new) = \frac{\prod^d_1 P(a_j|c_i) \cdot P(c_i)}{P(s)}$.
+
+\subsubsection{C4.5}
+Iterative Dischotomiser 3 (ID3), which is used to generate a decision tree from the training dataset. This algorithm regards the training dataset as a root node at the beginning. During each iteration, it uses every attribute to split the dataset and calculates the Entropy and Information Gain of the selected attribute, then choose the attribute which leads to a largest Information Gain as the partition attribute and generate subsets of the original dataset. Recursion will be applied to each subset considering only non­partition attribute. The recursion will be stopped in some cases: in the subset, every sample belongs to the same class, then the node is assigned with the class label and becomes a leaf node; there are no more non­partition attribute, then the node is assigned with the most common class label and becomes a leaf node; there no samples correspond to the condition, then the node is assigned with the most common class label in its parent node and becomes a leaf node. C4.5 makes some improvements to ID3. First, it handles both continuous and discrete attributes with a threshold metric. Then, once a decision tree is created, it is able to replace branches not helping with leaf nodes, which is known as pruning. Finally, it can deal with missing attribute values in training dataset by ignoring them in the process of calculating Entropy and Information Gain, which is also a main reason for us to use C4.5 instead of ID3 as the dataset has some missing values of attributes.
+
+\subsection{Clustering}
+Compared with classification, clustering is an unsupervised approach of data mining. Thus, we create a new dataset without attribute “genre”, and there is no need to divide the dataset into training and testing dataset. However, after applying clustering algorithm on the dataset, we will use the attribute “genre” in the original dataset to measure how good the performance of the method is.
+
+As there are both numeric and nominal values of attributes in the dataset, we will not use traditional approaches, such as K­Means, Fuzzy C­Means and DBSCAN, which are based on distance metric. Instead, we choose Robust Clustering using links (ROCK) to cluster the dataset into clusters within the number of genres.
+
+ROCK evaluates the similarity between samples with the number of shared neighbours rather than distance, then a hierarchical clustering scheme is used to cluster the dataset. Thus, it can handle nominal attribute values with this special link and perform better than other traditional algorithms.
+
 \subsection{Collaborative Filtering}
+
+Collaborative filtering filters information by using the recommendations of other people. It is based on the idea that people who agreed in their evaluation of certain items in the past are likely to agree again in the future. A person who wants to see a movie, might ask for recommendations from friends. The recommendations of some friends who have similar interests are trusted more than recommendations from others. This information is used in the decision on which movie to see. The above is the basic idea of our implementation is this part.
+
+Typically, collaborative filtering adopts the neighborhood-based technique. There are two kinds of approach: user-based and item-based.
 
 \textit{User-based collaborative filtering}, also know as \textit{k-NN collaborative},was the first of the automated CF methods. It find other users whose past rating behavior is similar to that of current user and
 use their ratings on that item to predict what the current user will like. 
@@ -487,7 +578,7 @@ Our goal is to predict the rating a user would give to a restaurant. We predict 
 
 Here $r'_{u,i}$ is the predicted rating from user $u$ on item $i$ and $r_{u,i}$ is the true rating; $N$ is the size of test dataset. 
 
-Another evaluation method is precision-recall: precision tells us how good the predictions are. In other words, how many were a hit.; recall tells us how many of the hits were accounted for, or the coverage of the desirable outcome.
+Another evaluation method is precision-recall: precision tells us how good the predictions are. In other words, how many were a hit; recall tells us how many of the hits were accounted for, or the coverage of the desirable outcome.
 \begin{equation}
 \begin{split}
 & precision = \\
@@ -532,13 +623,20 @@ Data for this part is from the MovieLens dataset which is a rich resource for re
 \end{figure}
 
 \subsubsection{Collaborative Filtering Results}
-We apply both user-based CF and item-based CF for rating predicting. Also, we use a random prediction for the baseline. Figure 5 compares the prediction accuracy of the three methods. 
+We apply both user-based CF and item-based CF for rating predicting. Also, we use a random prediction for the baseline. Figure 5 compares the prediction accuracy of the three methods. The  error rate shows that use-based CF works best among these three methods with a RMSE error of less than 1. Item-based CF is not as good as use-based CF. Its RMSE error rate is slightly higher than user-based CF. One possible reason is about when and how we generating recommendations. User-based CF saves the whole matrix and then generates the recommendation at predict by finding the closest user. While item-based CF saves only k closest items in the matrix and doesn’t have to save everything. It is pre-calculated and predict simply reads off the closest items. We can see that the MAE of user-based CF and item-based CF are nearly the same. MAE is always smaller than RMSE because RMSE will enlarge the penalty on incorrect predictings. It is not surprise that Random approach is the worst because it only set a random rating between 1 to 5 for each movie by users.
+
 \begin{figure}
 	\centering
 	\includegraphics[width=2.8in]{RMSE.png}
 	\caption{RMSE}
 	\label{fig:side:a}
 \end{figure}
+
+We compared the performance of Random, user-based CF and item-based CF by changing the parameter n. That is we evaluate top-1, top-3, top-5, top-10, top-15 and top-20 recommendation lists. We can visualize the results by ploting ROC curves(Figure 10) and precision-recall curves (Figure11). 
+
+ROC curve is a plot of the true positive rate against the false positive rate for the different possible cutpoints of a diagnostic test. The area under the curve is a measure of the accuracy. Thus the closer the curve follows the left-hand border and then the top border of the ROC space, the more accurate the test. The ROC curves show the same result with the former part. We can see that under a varying range of top-N list, the performance of user-based CF is always the best following by item-based CF. Random method is the worst. Besides, with the increasing of n, the differences of the TPR against FPR among the three becoming larger.
+
+Different form ROC whose goal is to be in the upper-left-hand corner, the goal of precision-recall space is to be in the upper-right-hand corner, and the PR curves in Figure 11 show that there user-based CF works quite well while item-based CF still has vast room for improvement.
 
 \begin{figure}
 	\centering
@@ -554,7 +652,7 @@ We apply both user-based CF and item-based CF for rating predicting. Also, we us
 	\label{fig:side:a}
 \end{figure}
 
-Table 1 shows the model time and prediction time of each applied algorithms.
+We also meatured the predcition time of each method. Table 1 shows the model time and prediction time of each applied algorithms. 
 \begin{table}
 	\caption{Running time of three algorithms}
 	\begin{center}
@@ -569,6 +667,8 @@ Table 1 shows the model time and prediction time of each applied algorithms.
 		\end{tabular}
 	\end{center}
 \end{table}
+
+Table 1 shows that Random approach is the fastest as it involves in little computation. Both user-based and item-based CF need to calculate similarities between users or items, which is a considerable computation. We noticed that item-based CF takes plenty of time on training model.
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
 % For figures, \caption should occur after the \includegraphics.

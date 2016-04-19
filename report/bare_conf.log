@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.15)  18 APR 2016 14:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.15)  18 APR 2016 21:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -222,6 +222,18 @@ LaTeX Warning: Label `fig:side:a' multiply defined.
 
 LaTeX Warning: Label `fig:side:a' multiply defined.
 
+
+LaTeX Warning: Label `fig:side:a' multiply defined.
+
+
+LaTeX Warning: Label `fig:side:a' multiply defined.
+
+
+LaTeX Warning: Label `fig:side:a' multiply defined.
+
+
+LaTeX Warning: Label `fig:side:a' multiply defined.
+
 )
 \openout1 = `bare_conf.aux'.
 
@@ -318,43 +330,117 @@ Overfull \hbox (0.94499pt too wide) in paragraph at lines 440--441
  [][] 
  []
 
-[2 <./ERgraph.png>] <rating.png, id=14, 2106.87125pt x 2106.87125pt>
+<genre_count.png, id=11, 752.8125pt x 154.5775pt>
+File: genre_count.png Graphic file (type png)
+ <use genre_count.png>
+Package pdftex.def Info: genre_count.png used on input line 453.
+(pdftex.def)             Requested size: 252.94499pt x 51.93767pt.
+
+Overfull \hbox (0.94499pt too wide) in paragraph at lines 453--454
+ [][] 
+ []
+
+<genre_dis.png, id=13, 2106.87125pt x 2106.87125pt>
+File: genre_dis.png Graphic file (type png)
+ <use genre_dis.png>
+Package pdftex.def Info: genre_dis.png used on input line 460.
+(pdftex.def)             Requested size: 252.94499pt x 252.94223pt.
+
+Overfull \hbox (0.94499pt too wide) in paragraph at lines 460--461
+ [][] 
+ []
+
+[2 <./ERgraph.png>] <rating_count.png, id=17, 2106.87125pt x 2106.87125pt>
+File: rating_count.png Graphic file (type png)
+
+<use rating_count.png>
+Package pdftex.def Info: rating_count.png used on input line 469.
+(pdftex.def)             Requested size: 252.94499pt x 252.94223pt.
+
+Overfull \hbox (0.94499pt too wide) in paragraph at lines 469--470
+ [][] 
+ []
+
+<year_count.png, id=18, 2106.87125pt x 2106.87125pt>
+File: year_count.png Graphic file (type png)
+ <use year_count.png>
+Package pdftex.def Info: year_count.png used on input line 478.
+(pdftex.def)             Requested size: 252.94499pt x 252.94223pt.
+
+Overfull \hbox (0.94499pt too wide) in paragraph at lines 478--479
+ [][] 
+ []
+
+[3 <./genre_count.png> <./genre_dis.png> <./rating_count.png> <./year_count.png
+>]
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
+Missing character: There is no ¬ in font ptmr7t!
+Missing character: There is no ≠ in font ptmr7t!
+Missing character: There is no ¬ in font ptmr7t!
+Missing character: There is no ≠ in font ptmr7t!
+Missing character: There is no ¬ in font ptmr7t!
+Missing character: There is no ≠ in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ú in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ù in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ú in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ù in font ptmr7t!
+Missing character: There is no ¬ in font ptmr7t!
+Missing character: There is no ≠ in font ptmr7t!
+Missing character: There is no ¬ in font ptmr7t!
+Missing character: There is no ≠ in font ptmr7t!
+ [4] <rating.png, id=39, 2106.87125pt x 2106.87125pt>
 File: rating.png Graphic file (type png)
-
-<use rating.png>
-Package pdftex.def Info: rating.png used on input line 515.
+ <use rating.png>
+Package pdftex.def Info: rating.png used on input line 606.
 (pdftex.def)             Requested size: 202.35622pt x 202.34093pt.
- <user_rating.png, id=16, 2106.87125pt x 2106.87125pt>
+
+<user_rating.png, id=40, 2106.87125pt x 2106.87125pt>
 File: user_rating.png Graphic file (type png)
-
-<use user_rating.png>
-Package pdftex.def Info: user_rating.png used on input line 522.
+ <use user_rating.png>
+Package pdftex.def Info: user_rating.png used on input line 613.
 (pdftex.def)             Requested size: 202.35622pt x 202.34093pt.
- <movie_rating.png, id=17, 2106.87125pt x 2106.87125pt>
+
+<movie_rating.png, id=41, 2106.87125pt x 2106.87125pt>
 File: movie_rating.png Graphic file (type png)
-
-<use movie_rating.png>
-Package pdftex.def Info: movie_rating.png used on input line 529.
+ <use movie_rating.png>
+Package pdftex.def Info: movie_rating.png used on input line 620.
 (pdftex.def)             Requested size: 202.35622pt x 202.34093pt.
- <RMSE.png, id=18, 481.8pt x 481.8pt>
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
+
+[5]
+Underfull \vbox (badness 1502) has occurred while \output is active []
+
+
+<RMSE.png, id=46, 481.8pt x 481.8pt>
 File: RMSE.png Graphic file (type png)
  <use RMSE.png>
-Package pdftex.def Info: RMSE.png used on input line 538.
+Package pdftex.def Info: RMSE.png used on input line 630.
 (pdftex.def)             Requested size: 202.35622pt x 202.35461pt.
-
-<ROC.png, id=19, 481.8pt x 481.8pt>
+ [6 <./rating.png> <./user_rating.png> <./movie_rating.png> <./RMSE.png>]
+<ROC.png, id=54, 481.8pt x 481.8pt>
 File: ROC.png Graphic file (type png)
  <use ROC.png>
-Package pdftex.def Info: ROC.png used on input line 544.
+Package pdftex.def Info: ROC.png used on input line 643.
 (pdftex.def)             Requested size: 202.35622pt x 202.35461pt.
 
-<precision_recall.png, id=20, 481.8pt x 481.8pt>
+<precision_recall.png, id=55, 481.8pt x 481.8pt>
 File: precision_recall.png Graphic file (type png)
  <use precision_recall.png>
-Package pdftex.def Info: precision_recall.png used on input line 551.
+Package pdftex.def Info: precision_recall.png used on input line 650.
 (pdftex.def)             Requested size: 202.35622pt x 202.35461pt.
 
-[3 <./rating.png> <./user_rating.png>]
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -366,38 +452,40 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[4 <./movie_rating.png> <./RMSE.png> <./ROC.png> <./precision_recall.png>]
-(./bare_conf.aux)
+[7 <./ROC.png> <./precision_recall.png>] (./bare_conf.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 2962 strings out of 494501
- 45953 string characters out of 6167029
- 116637 words of memory out of 5000000
- 6216 multiletter control sequences out of 15000+600000
- 38554 words of font info for 75 fonts, out of 8000000 for 9000
+ 2985 strings out of 494501
+ 46345 string characters out of 6167029
+ 116638 words of memory out of 5000000
+ 6234 multiletter control sequences out of 15000+600000
+ 40278 words of font info for 77 fonts, out of 8000000 for 9000
  322 hyphenation exceptions out of 8191
- 38i,16n,23p,802b,238s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,16n,23p,1538b,239s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015basic/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/lo
 cal/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
-r/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
-</usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.p
-fb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
-0.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr7.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmsy5.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmsy7.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/urw/time
-s/utmb8a.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/urw/times/utm
-bi8a.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/urw/times/utmr8a.
-pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-
-Output written on bare_conf.pdf (4 pages, 590713 bytes).
+r/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.
+pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi5.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmmi7.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr5.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr7.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/t
+ype1/urw/times/utmb8a.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/
+urw/times/utmbi8a.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/urw/
+times/utmr8a.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/urw/times
+/utmri8a.pfb>
+Output written on bare_conf.pdf (7 pages, 996475 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 48 compressed objects within 1 object stream
+ 111 PDF objects out of 1000 (max. 8388607)
+ 65 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
