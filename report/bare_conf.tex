@@ -423,13 +423,16 @@ In this report, the researcher have described traditional and modern recommender
 
 \section{Data Collection}
 In this paper, we will implement association rules, clustering, classification and rating prediction. We choose two widely used datasets about moives- IMDB and Movielens. IMDB dataset is used for the former three data mining methods and MovieLens is for rating predicting.
+
 \subsection{IMDB}
 The Internet Movie Database (IMDb) is a comprehensive online database having information about movies, actors, television shows, production, etc. The IMDb web site\cite{imdb} provides more than 50 text files in ad-hoc format (called lists) containing different characteristics about movies (e.g. actors.list or running-times.list). Given the large scale of the data and the degree of interactions between the people, IMDb is a fertile source of data mining problems.
+
 \subsection{MovieLens}
 MovieLens is a movie recommender project, developed by the Department of Computer Science and Engineering at the University of Minnesota. MovieLens is a typical collaborative filtering system that collects movie preferences from users and then groups users with similar tastes. Based on the movie ratings expressed by all the users in a group it attempts to predict for each individual their opinion on movies they have not yet seen. Two data sets are available at the MovieLens web site\cite{movielens}. In this paper, we will use the MovieLens 100K dataset which consists of 100,000 ratings for 1682 movies by 943 users.
 
 
 \section{Data Preparation}
+
 \subsection{Reconstruct Data in MySQL Database}
 At first we tried to store all the data in IMDB into MySQL. As mentioned above, the original dataset in IMDB is in text files which is a list format within natural language.This provided the insight that raw IMDB data are unsuitable for data mining unless they are processed through some natural language processing tool. To minimize the effort spent on parsing all the text files and then converting each one to a table in a database, a third party tool name IMDBPY as obtained from\cite{imdbpy} is used. It is an alternative way to navigate through movie information. IMDBPY automatically imports the list files and creates a MySQL database with tables and populates the tables with required data. 
 
@@ -445,6 +448,7 @@ The dataset contains abundant information about movies which makes it a very lar
 We tried several queries on the built database, such as finding the movie with the largest amount of budget or gross. The results are not always correct. For example, the values of budget are strings like "\pounds 998,852" or "\$102,437 (USA)" which makes us unable to find the movie with the largest amount of budget with simple SQL query. Besides, the database doesn't contain rating information of movies which is a crucial factor for our analysis. So next, we tried to load the files directly into R.
 
 \subsection{Parsing Data in R}
+
 The downloaded original files were too large to effectively load in R. The computation time and complexity are also a big challenge that our computer cannot handle. So we decide to build a reasonable sample dataset. A python script which can make a unique http request and retrieve data sample randomly is used. As our classification and clustering are based on the genre of the movie, there are many attributes that are useless, such as seriesID, season, Episode, and etc. We choose to drop these columns during data cleaning process. After processing, the movie dataframe contains 11142 rows of records and 31 attributes for each record.  There are 29 genres in total in our dataset as shown in Figure 2.
 
 There is one crucial problem that will influence our analysis in the following parts is that we noticed there are many missing values in the data. Almost every rows have one or more N/A value in different attributes. It is not possible to delete rows with missing value since it results in deleting almost the whole data. It is also impossible to replace the missing value because the values are strings, stratagies in data cleaning dealing with missing values are not suitable for this case.
@@ -484,6 +488,7 @@ Figure 5 shows the movie numbers in each year from 1891 to 2018. There is a clea
 
 \section{Methodologys}
 \subsection{Association Rules}
+
 Association rules are information gathered from datasets. Data mining are interested in discovering relations between attributes that always occur together for prediction and recommendation. 
 
 Formulation of the Association Rules Mining problem:
@@ -625,7 +630,7 @@ Data for this part is from the MovieLens dataset which is a rich resource for re
 \end{figure}
 
 \subsubsection{Collaborative Filtering Results}
-We apply both user-based CF and item-based CF for rating predicting. Also, we use a random prediction for the baseline. Figure 5 compares the prediction accuracy of the three methods. The  error rate shows that use-based CF works best among these three methods with a RMSE error of less than 1. Item-based CF is not as good as use-based CF. Its RMSE error rate is slightly higher than user-based CF. One possible reason is about when and how we generating recommendations. User-based CF saves the whole matrix and then generates the recommendation at predict by finding the closest user. While item-based CF saves only k closest items in the matrix and doesn’t have to save everything. It is pre-calculated and predict simply reads off the closest items. We can see that the MAE of user-based CF and item-based CF are nearly the same. MAE is always smaller than RMSE because RMSE will enlarge the penalty on incorrect predictings. It is not surprise that Random approach is the worst because it only set a random rating between 1 to 5 for each movie by users.
+We apply both user-based CF and item-based CF for rating predicting. Also, we use a random prediction for the baseline. Figure 5 compares the prediction accuracy of the three methods. The  error rate shows that use-based CF works best among these three methods with a RMSE error of less than 1. Item-based CF is not as good as use-based CF. Its RMSE error rate is slightly higher than user-based CF. One possible reason about this difference is when and how we generating recommendations. User-based CF saves the whole matrix and then generates the recommendation at predict by finding the closest user. While item-based CF saves only k closest items in the matrix and doesn’t have to save everything. It is pre-calculated and predict simply reads off the closest items. We can see that the MAE of user-based CF and item-based CF are nearly the same. MAE is always smaller than RMSE because RMSE will enlarge the penalty on incorrect predictings. It is not surprise that Random approach is the worst because it only set a random rating between 1 to 5 for each movie by users.
 
 \begin{figure}
 	\centering
