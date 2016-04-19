@@ -433,17 +433,19 @@ MovieLens is a movie recommender project, developed by the Department of Compute
 \subsection{Reconstruct Data in MySQL Database}
 At first we tried to store all the data in IMDB into MySQL. As mentioned above, the original dataset in IMDB is in text files which is a list format within natural language.This provided the insight that raw IMDB data are unsuitable for data mining unless they are processed through some natural language processing tool. To minimize the effort spent on parsing all the text files and then converting each one to a table in a database, a third party tool name IMDBPY as obtained from\cite{imdbpy} is used. It is an alternative way to navigate through movie information. IMDBPY automatically imports the list files and creates a MySQL database with tables and populates the tables with required data. 
 
-The dataset contains abundant information about movies which makes it a very large amount of records. It takes more than 3 hours to convert all the files and import the data into MySQL with IMDBPY. Then we add relevant indexes and foreign keys in the database. Figure 1 shows the relational schema of the IMDB database. We can see that this structure makes query in the database complicated because many additional joins are needed.
+The dataset contains abundant information about movies which makes it a very large amount of records. It takes more than 3 hours to convert all the files and import the data into MySQL with IMDBPY. Then we add relevant indexes and foreign keys in the database. Finally, we have 21 tables. Figure 1 shows the relational schema of the IMDB database. We can see that this structure makes query in the database complicated because many additional joins are needed.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=3.5in]{ERgraph.png}
-	\caption{IMDB Database}
+	\caption{IMDB Database Relational Schema}
 	\label{fig:side:a}
 \end{figure}
 
+We tried several queries on the built database, such as finding the movie with the largest amount of budget or gross. The results are not always correct. For example, the values of budget are strings like "\pounds 998,852" or "\$102,437 (USA)" which makes us unable to find the movie with the largest amount of budget with simple SQL query. Besides, the database doesn't contain rating information of movies which is a crucial factor for our analysis. So next, we tried to load the files directly into R.
+
 \subsection{Parsing Data in R}
-The downloaded original files were too large to effectively load in R. We find a python script which can make a unique http request and retrieve data sample randomly. As our classification and clustering are based on the genre of the movie, there are many attributes are useless, such as seriesID, season, Episode, and etc. We choose to drop these columns during data cleaning process. There are 29 genres in total in our dataset. After processing, the movie dataframe contains 11142 rows of records and 31 attributes for each record.  
+The downloaded original files were too large to effectively load in R. The computation time and complexity are also a big challenge that our computer cannot handle. So we decide to build a reasonable sample dataset. A python script which can make a unique http request and retrieve data sample randomly is used. As our classification and clustering are based on the genre of the movie, there are many attributes that are useless, such as seriesID, season, Episode, and etc. We choose to drop these columns during data cleaning process. After processing, the movie dataframe contains 11142 rows of records and 31 attributes for each record.  There are 29 genres in total in our dataset as shown in Figure 2.
 
 There is one crucial problem that will influence our analysis in the following parts is that we noticed there are many missing values in the data. Almost every rows have one or more N/A value in different attributes. It is not possible to delete rows with missing value since it results in deleting almost the whole data. It is also impossible to replace the missing value because the values are strings, stratagies in data cleaning dealing with missing values are not suitable for this case.
 
@@ -776,10 +778,7 @@ The conclusion goes here.
 
 
 % use section* for acknowledgment
-\section*{Acknowledgment}
 
-
-The authors would like to thank...
 
 
 
